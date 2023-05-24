@@ -47,9 +47,7 @@ def main():
         llm = OpenAI()
         chain = load_qa_chain(llm, chain_type="stuff")
         response = chain.run(input_documents=docs, question=user_question)
-
         st.write(response)
-
     except:
         st.write("Waiting for your PDF to Upload...")
 
