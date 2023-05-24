@@ -33,11 +33,11 @@ def main():
     )
     try:
         chunks = text_splitter.split_text(text)
-    
+
         # create embeddings
         embeddings = OpenAIEmbeddings()
         knowledge_base = FAISS.from_texts(chunks, embeddings)
-    
+
 
         # show user input
         user_question = st.text_input("Ask a question to your PDF:")
@@ -51,7 +51,7 @@ def main():
         st.write(response)
 
     except:
-        st.write("Upload your PDF")
+        st.write("Waiting for your PDF to Upload...")
 
 
 if __name__ == '__main__':
