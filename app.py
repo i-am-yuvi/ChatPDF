@@ -31,25 +31,24 @@ def main():
         chunk_overlap=200,
         length_function=len
     )
-    try:
-        chunks = text_splitter.split_text(text)
+    
+    chunks = text_splitter.split_text(text)
 
-        # create embeddings
-        embeddings = OpenAIEmbeddings()
-        knowledge_base = FAISS.from_texts(chunks, embeddings)
+    # create embeddings
+    embeddings = OpenAIEmbeddings()
+    knowledge_base = FAISS.from_texts(chunks, embeddings)
 
 
-        # show user input
-        user_question = st.text_input("Ask a question to your PDF:")
-        if user_question:
-            docs = knowledge_base.similarity_search(user_question)
+    # show user input
+    user_question = st.text_input("Ask a question to your PDF:")
+    if user_question:
+        docs = knowledge_base.similarity_search(user_question)
 
-        llm = OpenAI()
-        chain = load_qa_chain(llm, chain_type="stuff")
-        response = chain.run(input_documents=docs, question=user_question)
-        st.write(response)
-    except:
-        st.write("Waiting for your PDF to Upload...")
+    llm = OpenAI()
+    chain = load_qa_chain(llm, chain_type="stuff")
+    response = chain.run(input_documents=docs, question=user_question)
+    st.write(response)
+
 
 
 if __name__ == '__main__':
