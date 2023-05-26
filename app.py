@@ -8,6 +8,7 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 
+
 def main():
     load_dotenv()
     st.set_page_config(page_title="Ask your PDF")
