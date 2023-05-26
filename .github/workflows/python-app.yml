@@ -36,6 +36,8 @@ jobs:
 #     - name: Test with pytest
 #       run: |
 #         pytest
+    - name: Build container image
+      run: docker build -t ${{secrets.DOCKERHUB_USERNAME}}/synthetic-backend:$(echo $GITHUB_SHA | head -c7) .
         
     - name: Update deployment file if merged or pushed
       if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
