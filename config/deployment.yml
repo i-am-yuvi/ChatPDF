@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatpdf-deployment
+  namespace: Chat-PDF
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chatpdf-deployment
+  template:
+    metadata:
+      labels:
+        app: chatpdf-deployment
+    spec:
+      containers:
+        - name: Chat-PDF
+          image: <IMAGE>
+          ports:
+            - containerPort: 3500
+          env:
+            - name: OPENAI_API_KEY
+              value: $OPENAI_API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: Chatpdf-service
+  namespace: Chat-PDF
+spec:
+  type: LoadBalancer
+  selector:
+    app: Chat-PDF
+  ports:
+    - protocol: TCP
+      port: 3500
+      targetPort: 3500
