@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chatpdf-deployment
-  namespace: Chat-PDF
+  namespace: chat-pdf
 spec:
   replicas: 2
   selector:
@@ -14,7 +14,7 @@ spec:
         app: chatpdf-deployment
     spec:
       containers:
-        - name: Chat-PDF
+        - name: chat-pdf
           image: <IMAGE>
           ports:
             - containerPort: 3500
