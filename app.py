@@ -33,6 +33,7 @@ def main():
         length_function=len
     )
     
+    
     chunks = text_splitter.split_text(text)
 
     # create embeddings
