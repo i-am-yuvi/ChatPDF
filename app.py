@@ -10,6 +10,10 @@ from langchain.llms import OpenAI
 
 
 def main():
+    
+    a = 3 + 4
+    print(a)
+    
     load_dotenv()
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask your PDF📄")
