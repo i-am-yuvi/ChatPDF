@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-pdf
-          image: <IMAGE>
+          image: imyuvi2002/chat-pdf:e3e2a9d
           ports:
             - containerPort: 3500
           env:
