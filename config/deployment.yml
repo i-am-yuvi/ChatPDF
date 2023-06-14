@@ -20,7 +20,7 @@ spec:
             - containerPort: 3500
           env:
             - name: OPENAI_API_KEY
-              value: $OPENAI_API_KEY
+              value: ${{ secrets.OPENAI_API_KEY }}
 ---
 apiVersion: v1
 kind: Service
