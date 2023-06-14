@@ -50,11 +50,23 @@ jobs:
     - name: Push image to Docker Hub
       if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
       run: docker push ${{secrets.DOCKERHUB_USERNAME}}/chat-pdf:$(echo $GITHUB_SHA | head -c7)
-      
-    - name: Update deployment file
-      if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
+    - name: Generate deploy manifest from Jinja template
+      uses: cuchi/jinja2-action@v1.1.0
+      with: 
+        template: tmpl/hello.j2
+        output_file: config/deployment.yml
+        strict: true
+        variables: |
+          image_deploy_tag=sha-${{ steps.vars.outputs.sha_short }}
+            
+    - name: Commit deploy manifest on local repo
       run: |
-        TAG=$(echo $GITHUB_SHA | head -c7)
-        sed -i "s|<IMAGE>|${{secrets.DOCKERHUB_USERNAME}}/chat-pdf:${TAG}|" $GITHUB_WORKSPACE/config/deployment.yml
-  
-        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -s -m "[skip ci] Generate deployment manifests" 
+          
+    - name: Push deploy manifests to local repo
+      uses: ad-m/github-push-action@master
+      with: 
+        github_token: ${{ secrets.ACTION_COMMIT_TOKEN }}
