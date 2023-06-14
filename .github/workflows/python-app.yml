@@ -37,7 +37,7 @@ jobs:
 #       run: |
 #         pytest
     - name: Build container image
-      run: docker build -t ${{secrets.DOCKERHUB_USERNAME}}/chat_pdf:$(echo $GITHUB_SHA | head -c7) .
+      run: docker build -t ${{secrets.DOCKERHUB_USERNAME}}/chat-pdf:$(echo $GITHUB_SHA | head -c7) .
         
     - name: Update deployment file if merged or pushed
       if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
