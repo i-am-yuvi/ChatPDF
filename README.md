@@ -38,7 +38,7 @@ To run the ChatPDF project, follow these steps:
 5. Run the following command to start the application:
 
 ```
-streamlit run chatpdf.py
+streamlit run app.py
 ```
 
 6. The application will start and display a web interface.
