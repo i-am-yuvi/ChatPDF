@@ -20,6 +20,10 @@ try:
         #uploading the pdf
         pdf = st.file_uploader("Upload your PDF", type="pdf")
 
+        a = 4
+        b = 5
+        print("the sum of 4 & 5 is" + (a+b))
+        
         # extract the text from the pdf
         if pdf is not None:
             pdf_reader = PdfReader(pdf)
